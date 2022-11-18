@@ -1,5 +1,6 @@
 /* eslint-disable max-nested-callbacks */
 import {
+  InvalidUseId,
   InvalidUserEmail,
   InvalidUserName,
   InvalidUserUsername,
@@ -8,24 +9,30 @@ import { User } from "./user-entity";
 
 describe("User Entity", () => {
   function createUser(): User {
-    return new User("John", "john", "john@test.com");
+    return new User("123", "John", "john", "john@test.com");
   }
+
+  it("should throw error when id is empty", () => {
+    expect(() => {
+      new User("", "John", "john", "john@test.com");
+    }).toThrow(new InvalidUseId());
+  });
 
   it("should throw error when name is empty", () => {
     expect(() => {
-      new User("", "john", "john@test.com");
+      new User("123", "", "john", "john@test.com");
     }).toThrow(new InvalidUserName());
   });
 
   it("should throw error when username is empty", () => {
     expect(() => {
-      new User("John", "", "john@test.com");
+      new User("123", "John", "", "john@test.com");
     }).toThrow(new InvalidUserUsername());
   });
 
   it("should throw error when email is empty", () => {
     expect(() => {
-      new User("John", "john", "");
+      new User("123", "John", "john", "");
     }).toThrow(new InvalidUserEmail());
   });
 

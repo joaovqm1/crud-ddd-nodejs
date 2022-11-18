@@ -4,6 +4,12 @@
   "plugins": [
     "@typescript-eslint"
   ],
+  "parserOptions": {
+    "ecmaVersion": 2015,
+    "ecmaFeatures": {
+      "legacyDecorators": true
+    }
+  },
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",

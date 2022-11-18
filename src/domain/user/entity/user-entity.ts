@@ -1,4 +1,5 @@
 import {
+  InvalidUseId,
   InvalidUserEmail,
   InvalidUserName,
   InvalidUserUsername,
@@ -12,8 +13,13 @@ export class User {
   private _email: string;
   private _active = false;
 
-  constructor(name: string, username: string, email: string) {
-    this._id = StringUtilitiesImpl.createRandomUUID();
+  constructor(
+    id: string,
+    name: string,
+    username: string,
+    email: string,
+  ) {
+    this._id = id;
     this._name = name;
     this._username = username;
     this._email = email;
@@ -21,6 +27,10 @@ export class User {
   }
 
   private validate(): void {
+    if (this._id?.length === 0) {
+      throw new InvalidUseId();
+    }
+
     if (this._name?.length === 0) {
       throw new InvalidUserName();
     }
@@ -34,8 +44,20 @@ export class User {
     }
   }
 
+  get id(): string {
+    return this._id;
+  }
+
   get name(): string {
     return this._name;
+  }
+
+  get username(): string {
+    return this._username;
+  }
+
+  get email(): string {
+    return this._email;
   }
 
   changeName(name: string) {
