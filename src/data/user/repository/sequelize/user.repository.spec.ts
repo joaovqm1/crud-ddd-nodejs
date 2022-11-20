@@ -1,7 +1,7 @@
 /* eslint-disable max-nested-callbacks */
 import { UserNotFound } from "@/commom";
 import { User } from "@/domain";
-import { Sequelize } from "sequelize-typescript";
+import { Model, Sequelize } from "sequelize-typescript";
 import { UserModel } from "./user.model";
 import { UserRepository } from "./user.repository";
 
@@ -25,8 +25,16 @@ describe("User repository test", () => {
   });
 
   afterEach(async () => {
-    await sequelize.close();
+    await sequelize?.close();
   });
+
+  function transformModelToJSONAndCleanIt(model: Model | null): any {
+    const modelJSON = model?.toJSON();
+    delete modelJSON.createdAt;
+    delete modelJSON.updatedAt;
+
+    return modelJSON;
+  }
 
   it("should create a user", async () => {
     await userRepository.create(user);
@@ -35,7 +43,7 @@ describe("User repository test", () => {
       where: { id: "123" },
     });
 
-    expect(userModel?.toJSON()).toStrictEqual({
+    expect(transformModelToJSONAndCleanIt(userModel)).toEqual({
       id: "123",
       name: user.name,
       username: user.username,
@@ -53,7 +61,7 @@ describe("User repository test", () => {
       where: { id: "123" },
     });
 
-    expect(userModel?.toJSON()).toStrictEqual({
+    expect(transformModelToJSONAndCleanIt(userModel)).toEqual({
       id: "123",
       name: user.name,
       username: user.username,
@@ -67,7 +75,7 @@ describe("User repository test", () => {
 
     const userResult = await userRepository.find(user.id);
 
-    expect(user).toStrictEqual(userResult);
+    expect(user).toEqual(userResult);
   });
 
   it("should throw an error when user is not found", async () => {
@@ -77,8 +85,6 @@ describe("User repository test", () => {
   });
 
   it("should find all users", async () => {
-    await userRepository.create(user);
-
     const user2 = new User(
       "1234",
       "John 2",

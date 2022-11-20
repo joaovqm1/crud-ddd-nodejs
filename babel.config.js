@@ -1,10 +1,10 @@
-// eslint-disable-next-line no-undef
+/* eslint-disable no-undef */
 module.exports = {
   presets: [
-    ["@babel/preset-env", { targets: { node: "current" } }],
-    "@babel/preset-typescript",
+    ['@babel/preset-env', { targets: { node: 'current' } }],
+    ['@babel/preset-typescript', { allowDeclareFields: true }],
   ],
   plugins: [
-    ["@babel/plugin-proposal-decorators", { version: "2021-12" }]
+    ['@babel/plugin-syntax-decorators', { decoratorsBeforeExport: false }]
   ]
 }

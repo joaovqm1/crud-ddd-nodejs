@@ -4,11 +4,10 @@ import {
   PrimaryKey,
   Column,
 } from "sequelize-typescript";
-
 @Table({
   tableName: "users",
 })
-export class UserModel extends Model {
+class UserModel extends Model {
   @PrimaryKey
   @Column
   declare id: string;
@@ -25,3 +24,5 @@ export class UserModel extends Model {
   @Column({ allowNull: false })
   declare active: boolean;
 }
+
+export { UserModel };
