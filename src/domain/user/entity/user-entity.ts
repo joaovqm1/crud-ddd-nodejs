@@ -4,7 +4,6 @@ import {
   InvalidUserName,
   InvalidUserUsername,
 } from "@/commom";
-import { StringUtilitiesImpl } from "@/utilities";
 
 export class User {
   private _id: string;
