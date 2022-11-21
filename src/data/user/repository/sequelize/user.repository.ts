@@ -1,8 +1,8 @@
 import { UserNotFound } from "@/commom";
-import { User, UserRepositoryInterface } from "@/domain";
+import { User, UserRepository } from "@/domain";
 import { UserModel } from "./user.model";
 
-export class UserRepository implements UserRepositoryInterface {
+export class UserSequelizeRepository implements UserRepository {
   async create(entity: User): Promise<void> {
     await UserModel.create({
       id: entity.id,

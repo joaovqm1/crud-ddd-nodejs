@@ -3,11 +3,11 @@ import { UserNotFound } from "@/commom";
 import { User } from "@/domain";
 import { Model, Sequelize } from "sequelize-typescript";
 import { UserModel } from "./user.model";
-import { UserRepository } from "./user.repository";
+import { UserSequelizeRepository } from "./user.repository";
 
 describe("User repository test", () => {
   let sequelize: Sequelize;
-  const userRepository = new UserRepository();
+  const userRepository = new UserSequelizeRepository();
   let user: User;
 
   beforeEach(async () => {
