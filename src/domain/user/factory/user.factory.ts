@@ -1,12 +1,11 @@
 import { StringUtilitiesImpl } from "@/utilities";
 import { User } from "../entity";
 
-interface CreateUser {
+export interface CreateUser {
   name: string;
   email: string;
   username?: string;
 }
-
 export class UserFactory {
   static create(params: CreateUser): User {
     return new User(

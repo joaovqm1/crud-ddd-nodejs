@@ -1,6 +1,7 @@
+import { setUpDatabase } from "@/main/factories";
 import Hapi from "@hapi/hapi";
 import { Server } from "@hapi/hapi";
-import { createUser } from "./routes";
+import { createUser, getUsers } from "./user";
 
 export let server: Server;
 
@@ -12,14 +13,22 @@ export const init = async function (): Promise<Server> {
 
   server.route({
     method: "POST",
-    path: "/user",
+    path: "/users",
     handler: createUser,
+  });
+
+  server.route({
+    method: "GET",
+    path: "/users",
+    handler: getUsers,
   });
 
   return server;
 };
 
 export const start = async function (): Promise<void> {
+  await setUpDatabase();
+
   console.log(
     `Listening on ${server.settings.host}:${server.settings.port}`,
   );
