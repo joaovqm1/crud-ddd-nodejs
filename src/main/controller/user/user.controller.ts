@@ -1,4 +1,4 @@
-import { getUserUseCase } from "../../../factories";
+import { getUserUseCase } from "../../factories";
 import { Request } from "@hapi/hapi";
 import { CreateUser, User, UserFactory } from "@/domain";
 

@@ -1,7 +1,6 @@
-import { setUpDatabase } from "@/main/factories";
 import Hapi from "@hapi/hapi";
 import { Server } from "@hapi/hapi";
-import { createUser, getUsers } from "./user";
+import { createUser, getUsers } from "../../controller/user";
 
 export let server: Server;
 
@@ -27,8 +26,6 @@ export const init = async function (): Promise<Server> {
 };
 
 export const start = async function (): Promise<void> {
-  await setUpDatabase();
-
   console.log(
     `Listening on ${server.settings.host}:${server.settings.port}`,
   );
@@ -40,3 +37,7 @@ process.on("unhandledRejection", err => {
   console.error(err);
   process.exit(1);
 });
+
+export function startRestServer(): void {
+  init().then(() => start());
+}
