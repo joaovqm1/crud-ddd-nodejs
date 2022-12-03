@@ -4,9 +4,9 @@ import { startGraphQLServer } from "./graphql";
 import { startRestServer } from "./rest";
 
 async function main(): Promise<void> {
-  await setUpDatabase();
-
   dotenv.config();
+
+  await setUpDatabase();
 
   if (shouldExecuteGraphQLServer()) {
     startGraphQLServer();

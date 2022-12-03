@@ -1,7 +1,7 @@
 import { gql } from "apollo-server-express";
 export const Schema = gql`
   type User {
-    id: ID!
+    id: ID
     name: String!
     username: String
     email: String!
@@ -11,5 +11,9 @@ export const Schema = gql`
   type Query {
     getAllUsers: [User]
     getUser(id: String): User
+  }
+
+  type Mutation {
+    addUser(name: String!, email: String!, username: String): User
   }
 `;

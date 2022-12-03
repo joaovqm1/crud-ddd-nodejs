@@ -1,5 +1,6 @@
+import { CreateUser } from "@/domain";
 import Hapi from "@hapi/hapi";
-import { Server } from "@hapi/hapi";
+import { Server, Request } from "@hapi/hapi";
 import { createUser, getUsers } from "../../controller/user";
 
 export let server: Server;
@@ -13,7 +14,8 @@ export const init = async function (): Promise<Server> {
   server.route({
     method: "POST",
     path: "/users",
-    handler: createUser,
+    handler: async (request: Request) =>
+      createUser(request.payload as CreateUser),
   });
 
   server.route({

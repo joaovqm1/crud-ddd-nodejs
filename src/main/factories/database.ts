@@ -6,7 +6,6 @@ export async function setUpDatabase(): Promise<void> {
     dialect: "sqlite",
     storage: ":memory:",
     logging: false,
-    sync: { force: true },
   });
 
   sequelize.addModels([UserModel]);
